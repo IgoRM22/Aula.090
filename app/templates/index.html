@@ -2,6 +2,9 @@
 
 {% block page_content %}
 {% if current_user.is_authenticated %}
+    <div class="page-header"></div>
+        <h1>Olá, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Desconhecido{% endif %}!</h1>
+    </div>
     <h2>Relação de usuários cadastrados</h2>
     <table class="table">
         <thead>
@@ -22,10 +25,6 @@
         </tbody>
     </table>
 {% endif %}
-
-<div class="page-header">
-    <h1>Olá, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Desconhecido{% endif %}!</h1>
-</div>
 {% endblock %}
 
 {% block title %}Flasky{% endblock %}
