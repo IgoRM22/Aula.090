@@ -1,36 +1,31 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
 
-{% block title %}Página Inicial{% endblock %}
-
-{% block content %}
-<div class="jumbotron">
-    <h1>Olá, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Visitante{% endif %}!</h1>
-</div>
-
+{% block page_content %}
 {% if current_user.is_authenticated %}
-    <section>
-        <h3>Lista de Usuários Registrados</h3>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Usuário.</th>
-                        <th>E-mail</th>
-                        <th>Conta Confirmada</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                    <tr>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ 'Sim' if user.confirmed else 'Não' }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <h2>Relação de usuários cadastrados</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome de usuário</th>
+                <th>E-mail</th>
+                <th>Confirmado?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.confirmed }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endif %}
 
+<div class="page-header">
+    <h1>Eaí, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Desconhecido{% endif %}!</h1>
+</div>
 {% endblock %}
+
+{% block title %}Flasky{% endblock %}
